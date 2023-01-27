@@ -1,3 +1,14 @@
+function exibirJson(url) {
+    async function pegarJson(url) {
+        const response = await fetch(url);
+        const promise = response.json();
+        return promise;
+    }
+
+    const promise = pegarJson(url);
+    promise.then((data) => console.log(data));
+}
+
 function dadoFormatado(dado) {
     if (dado < 10) {
         dado = '0' + dado.toString();
