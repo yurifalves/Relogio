@@ -1,12 +1,19 @@
-function exibirJson(url) {
-    async function pegarJson(url) {
+function displayJson1(url) {
+    async function getJsonPromise(url) {
         const response = await fetch(url);
         const promise = response.json();
         return promise;
     }
 
-    const promise = pegarJson(url);
-    promise.then((data) => console.log(data));
+    getJsonPromise(url).then((json) => console.log(json));
+}
+
+function displayJson2(url) {
+    const fetchPromise = fetch(url);
+
+    fetchPromise
+        .then((response) => response.json())
+        .then((data) => console.log(data))
 }
 
 function dadoFormatado(dado) {
