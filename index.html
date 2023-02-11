@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha idade</title>
+    <style>
+        div {
+            margin: 0.4rem 0;
+        }
+
+        label {
+            font: 1rem 'Fira Sans', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sobre mim</h1>
+    <form>
+        <div>
+            <label for="data-de-nascimento">Selecione a data de nascimento:</label>
+            <input id="data-de-nascimento" type="date" value="2018-07-22">
+        </div>
+
+        <div>
+            <label for="hora-de-nascimento">Selecione a hora de nascimento:</label>
+            <input id="hora-de-nascimento" type="time">
+        </div>
+    </form>
+
+    <script>
+        function diaNascimento() {
+            const dataNascimento = document.querySelector('#data-de-nascimento').valueAsDate;
+            return dataNascimento.getDate() + 1;
+        }
+
+        function mesNascimento() {
+            const dataNascimento = document.querySelector('#data-de-nascimento').valueAsDate;
+            return dataNascimento.getMonth() + 1;
+        }
+
+        function anoNascimento() {
+            const dataNascimento = document.querySelector('#data-de-nascimento').valueAsDate;
+            return dataNascimento.getFullYear();
+        }
+
+        function horaNascimento() {
+            const horarioNascimento = document.querySelector('#hora-de-nascimento').valueAsDate;
+            return horarioNascimento.getHours() + 3;
+        }
+
+        function minutoNascimento() {
+            const horarioNascimento = document.querySelector('#hora-de-nascimento').valueAsDate;
+            return horarioNascimento.getMinutes();
+        }
+    </script>
+</body>
+</html>
