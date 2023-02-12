@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha idade</title>
     <style>
+        body {
+            background-color: lightblue;
+            Font-family: Cambria, Georgia, serif;
+        }
+
         div {
             margin: 0.4rem 0;
         }
@@ -49,19 +54,31 @@
 
         function idadeMeses(dateString) {  // dateString === 'yyyy/mm/dd'
             const hoje = new Date();
-            const idadeM = idadeAnos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`) * 12;
+            let idadeM = idadeAnos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`) * 12;
 
-            if (parseInt(mesNascimento()) > hoje.getMonth+1) {
-                // ...
-            }
-            else if (parseInt(mesNascimento()) < hoje.getMonth+1) {
-                // ...
+            if (mesNascimento() > hoje.getMonth()+1) {
+                idadeM += mesNascimento() - hoje.getMonth()+1;
             }
             else {
-                if (parseInt(diaNascimento()) > hoje.getDate()) {
-                    (parseInt(horaNascimento()))
-                }
+                idadeM -= mesNascimento() - hoje.getMonth()+1;
             }
+
+            return idadeM;
+        }
+
+        function idadeSemanas(dateString) {  // dateString === 'yyyy/mm/dd'
+            const idadeS = parseInt(idadeDias(dateString) / 7);
+            return idadeS;
+        }
+
+        function idadeDias(dateString) {  // dateString === 'yyyy/mm/dd'
+            const idadeD = parseInt(idadeHoras(dateString) / 24);
+            return idadeD;
+        }
+
+        function idadeHoras(dateString) {  // dateString === 'yyyy/mm/dd'
+            const idadeH = parseInt(idadeMinutos(dateString) / 60);
+            return idadeH;
         }
 
         function idadeMinutos(dateString) {  // dateString === 'yyyy/mm/dd'
@@ -82,6 +99,7 @@
         }
 
         /* --- FUNÇÕES PARA PEGAR OS DADOS DO FORMULÁRIO --- */
+
         function diaNascimento() {
             const dataNascimento = document.querySelector('#data-de-nascimento').value;  // 'yyyy-mm-dd'
             return parseInt(dataNascimento.split('-')[2]);
@@ -98,10 +116,7 @@
         }
 
 
-        // FUNÇÕES PARA EXIBIR A IDADE
-        function exibirDados() {
-            exibirAnos();
-        }
+        /* --- FUNÇÕES PARA EXIBIR AS IDADES --- */
 
         function exibirAnos() {
             const paragrafoIdadeAnos = document.querySelector('p#idade-anos');
@@ -109,19 +124,31 @@
         }
 
         function exibirMeses() {
+            const paragrafoIdadeMeses = document.querySelector('p#idade-meses');
+            paragrafoIdadeMeses.textContent = `Em meses: ${idadeMeses(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`; 
+
             // setTimeout(exibirMeses, 28*7*24*60*60*1000);
         }
 
         function exibirSemanas() {
+            const paragrafoIdadeSemanas = document.querySelector('p#idade-semanas');
+            paragrafoIdadeSemanas.textContent = `Em semanas: ${idadeSemanas(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`; 
+
             // setTimeout(exibirSemanas, 6*24*60*60*1000);
         }
 
         function exibirDias() {
+            const paragrafoIdadeDias = document.querySelector('p#idade-dias');
+            paragrafoIdadeDias.textContent = `Em dias: ${idadeDias(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`; 
+
             // setTimeout(exibirDias, 24*60*60*1000);
         }
 
         function exibirHoras() {
-            // setTimeout(exibirHoras, 60*60*1000);
+            const paragrafoIdadeHoras = document.querySelector('p#idade-horas');
+            paragrafoIdadeHoras.textContent = `Em horas: ${idadeHoras(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`; 
+
+            setTimeout(exibirHoras, 60*60*1000);
         }
 
         function exibirMinutos() {
@@ -157,7 +184,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => exibirIdades());
-
         document.querySelector('input#data-de-nascimento').addEventListener('change', () => exibirIdades());
 
     </script>
