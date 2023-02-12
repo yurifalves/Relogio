@@ -36,7 +36,7 @@
     <form>
         <div>
             <label for="data-de-nascimento">Selecione a data de nascimento:</label>
-            <input id="data-de-nascimento" type="date" value="2018-07-22">
+            <input id="data-de-nascimento" type="date">
         </div>
     </form>
     <h3>Essa é a sua idade aproximada:</h2>
@@ -195,7 +195,6 @@
             exibirMilissegundos();
         }
 
-        document.addEventListener('DOMContentLoaded', () => exibirIdades());
         document.querySelector('input#data-de-nascimento').addEventListener('change', () => exibirIdades());
 
     </script>
