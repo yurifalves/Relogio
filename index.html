@@ -31,9 +31,11 @@
     <p id="idade-horas">Em horas:</p>
     <p id="idade-minutos">Em minutos:</p>
     <p id="idade-segundos">Em segundos:</p>
-    <p id="idade-milisegundos">Em milisegundos:</p>
+    <p id="idade-milissegundos">Em milissegundos:</p>
 
     <script>
+        /* --- FUNÇÕES PARA DESCOBRIR AS DIFERENTES IDADES --- */
+
         function idadeAnos(dateString) {  // dateString === 'yyyy/mm/dd'
             const hoje = new Date();
             const birthDate = new Date(dateString);
@@ -62,14 +64,24 @@
             }
         }
 
-        function idadeMilisegundos(dateString) {  // dateString === 'yyyy/mm/dd'
+        function idadeMinutos(dateString) {  // dateString === 'yyyy/mm/dd'
+            const idadeM = parseInt(idadeSegundos(dateString) / 60);
+            return idadeM;
+        }
+
+        function idadeSegundos(dateString) {  // dateString === 'yyyy/mm/dd'
+            const idadeS = parseInt(idadeMilissegundos(dateString) / 1000);
+            return idadeS;
+        }
+
+        function idadeMilissegundos(dateString) {  // dateString === 'yyyy/mm/dd'
             const hoje = new Date();
             const dataNascimento = new Date(dateString);
             const idadeM = hoje - dataNascimento;
             return idadeM;
         }
 
-        // FUNÇÕES PARA PEGAR OS DADOS DO FORMULÁRIO
+        /* --- FUNÇÕES PARA PEGAR OS DADOS DO FORMULÁRIO --- */
         function diaNascimento() {
             const dataNascimento = document.querySelector('#data-de-nascimento').value;  // 'yyyy-mm-dd'
             return parseInt(dataNascimento.split('-')[2]);
@@ -93,18 +105,15 @@
 
         function exibirAnos() {
             const paragrafoIdadeAnos = document.querySelector('p#idade-anos');
-            const idadeAnos = idadeAnos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`);
-            paragrafoIdadeAnos.textContent += `${idadeAnos} anos`;
+            paragrafoIdadeAnos.textContent = `Em anos: ${idadeAnos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`;
         }
 
         function exibirMeses() {
-            const paragrafoIdadeMeses = document.querySelector('p#idade-meses');
-            const idadeMeses = idadeMeses(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`);
-            paragrafoIdadeMeses.textContent += `${idadeMeses} meses`;
+            // setTimeout(exibirMeses, 28*7*24*60*60*1000);
         }
 
         function exibirSemanas() {
-            //
+            // setTimeout(exibirSemanas, 6*24*60*60*1000);
         }
 
         function exibirDias() {
@@ -116,22 +125,27 @@
         }
 
         function exibirMinutos() {
-            // setTimeout(exibirMinutos, 60*1000);
+            const paragrafoIdadeMinutos = document.querySelector('p#idade-minutos');
+            paragrafoIdadeMinutos.textContent = `Em minutos: ${idadeMinutos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`; 
+
+            setTimeout(exibirMinutos, 60*1000);
         }
 
         function exibirSegundos() {
-            // setTimeout(exibirSegundos, 1000);
+            const paragrafoIdadeSegundos = document.querySelector('p#idade-segundos');
+            paragrafoIdadeSegundos.textContent = `Em segundos: ${idadeSegundos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`; 
+
+            setTimeout(exibirSegundos, 1000);
         }
 
-        function exibirMilisegundos() {
-            const paragrafoIdadeMilisegundos = document.querySelector('p#idade-milisegundos');
-            paragrafoIdadeMilisegundos.textContent = `Em milisegundos: ${idadeMilisegundos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`; 
+        function exibirMilissegundos() {
+            const paragrafoIdadeMilissegundos = document.querySelector('p#idade-milissegundos');
+            paragrafoIdadeMilissegundos.textContent = `Em milissegundos: ${idadeMilissegundos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`)}`; 
 
-            setTimeout(exibirMilisegundos, 1);
+            setTimeout(exibirMilissegundos, 1);
         }
 
-
-        document.addEventListener('DOMContentLoaded', () => {
+        function exibirIdades() {
             exibirAnos();
             exibirMeses();
             exibirSemanas();
@@ -139,8 +153,13 @@
             exibirHoras();
             exibirMinutos();
             exibirSegundos();
-            exibirMilisegundos();
-        });
+            exibirMilissegundos();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => exibirIdades());
+
+        document.querySelector('input#data-de-nascimento').addEventListener('change', () => exibirIdades());
+
     </script>
 </body>
 </html>
