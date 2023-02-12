@@ -25,35 +25,117 @@
 
         <div>
             <label for="hora-de-nascimento">Selecione a hora de nascimento:</label>
-            <input id="hora-de-nascimento" type="time">
+            <input id="hora-de-nascimento" type="time" value="09:00">
         </div>
+
+        <h2>Essa é a sua idade:</h2>
+        <p id="idade-anos">Em anos: </p>
+        <p id="idade-meses">Em meses: </p>
     </form>
 
     <script>
+        function idadeAnos(dateString) {  // dateString === 'yyyy/mm/dd'
+            const hoje = new Date();
+            const birthDate = new Date(dateString);
+            let idade = hoje.getFullYear() - birthDate.getFullYear();
+            const m = hoje.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && hoje.getDate() < birthDate.getDate())) {
+                idade--;
+            }
+            return idade;
+        }
+
+        function idadeMeses(dateString) {  // dateString === 'yyyy/mm/dd'
+            if (parseInt(mesNascimento()) > (new Date).getMonth+1) {
+                // ...
+            }
+            else if (parseInt(mesNascimento()) < (new Date).getMonth+1) {
+                // ...
+            }
+            else {
+                if (diaNascimento() > )
+            }
+        }
+
+        // FUNÇÕES PARA PEGAR OS DADOS DO FORMULÁRIO
         function diaNascimento() {
-            const dataNascimento = document.querySelector('#data-de-nascimento').valueAsDate;
-            return dataNascimento.getDate() + 1;
+            const dataNascimento = document.querySelector('#data-de-nascimento').value;  // 'yyyy-mm-dd'
+            return (dataNascimento.split('-')[2]);
         }
 
         function mesNascimento() {
-            const dataNascimento = document.querySelector('#data-de-nascimento').valueAsDate;
-            return dataNascimento.getMonth() + 1;
+            const dataNascimento = document.querySelector('#data-de-nascimento').value;  // 'yyyy-mm-dd'
+            return dataNascimento.split('-')[1];
         }
 
         function anoNascimento() {
-            const dataNascimento = document.querySelector('#data-de-nascimento').valueAsDate;
-            return dataNascimento.getFullYear();
+            const dataNascimento = document.querySelector('#data-de-nascimento').value;  // 'yyyy-mm-dd'
+            return dataNascimento.split('-')[0];
         }
 
         function horaNascimento() {
-            const horarioNascimento = document.querySelector('#hora-de-nascimento').valueAsDate;
-            return horarioNascimento.getHours() + 3;
+            const horarioNascimento = document.querySelector('#hora-de-nascimento').value;  // 'hh:mm'
+            return horarioNascimento.split(':')[0];
         }
 
         function minutoNascimento() {
-            const horarioNascimento = document.querySelector('#hora-de-nascimento').valueAsDate;
-            return horarioNascimento.getMinutes();
+            const horarioNascimento = document.querySelector('#hora-de-nascimento').value;  // 'hh:mm'
+            return horarioNascimento.split(':')[1];
         }
+
+
+        // FUNÇÕES PARA EXIBIR A IDADE
+        function exibirDados() {
+            exibirAnos();
+        }
+
+        function exibirAnos() {
+            const paragrafoIdadeAnos = document.querySelector('p#idade-anos');
+            const idadeAnos = idadeAnos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`);
+            paragrafoIdadeAnos.textContent += `${idadeAnos} anos`;
+        }
+
+        function exibirMeses() {
+            const paragrafoIdadeMeses = document.querySelector('p#idade-meses');
+            const idadeMeses = idadeMeses(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`) * 12;
+            paragrafoIdadeMeses.textContent += `${idadeMeses} meses`;
+        }
+
+        function exibirSemanas() {
+            //
+        }
+
+        function exibirDias() {
+            // setTimeout(exibirDias, 24*60*60*1000);
+        }
+
+        function exibirHoras() {
+            // setTimeout(exibirHoras, 60*60*1000);
+        }
+
+        function exibirMinutos() {
+            // setTimeout(exibirMinutos, 60*1000);
+        }
+
+        function exibirSegundos() {
+            // setTimeout(exibirSegundos, 1000);
+        }
+
+        function exibirMilisegundos() {
+            // setTimeout(exibirMilisegundos, 1);
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            exibirAnos();
+            exibirMeses();
+            exibirSemanas();
+            exibirDias();
+            exibirHoras();
+            exibirMinutos();
+            exibirSegundos();
+            exibirMilisegundos();
+        });
     </script>
 </body>
 </html>
