@@ -61,13 +61,14 @@
 
         function idadeMeses(dateString) {  // dateString === 'yyyy/mm/dd'
             const hoje = new Date();
+            const diferencaMeses = Math.abs(mesNascimento() - hoje.getMonth()+1);
             let idadeM = idadeAnos(`${anoNascimento()}/${mesNascimento()}/${diaNascimento()}`) * 12;
 
             if (mesNascimento() > hoje.getMonth()+1) {
-                idadeM += mesNascimento() - hoje.getMonth()+1;
+                idadeM += 12 - diferencaMeses;
             }
             else {
-                idadeM -= mesNascimento() - hoje.getMonth()+1;
+                idadeM += diferencaMeses;
             }
 
             return idadeM;
