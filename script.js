@@ -11,7 +11,7 @@ function displayJson1(url) {
 function displayJson2(url) {
     fetch(url)
         .then(response => response.json())
-        .then(json => console.log(json))
+        .then(jsonObject => console.log(jsonObject))
 }
 
 function dadoFormatado(dado) {
