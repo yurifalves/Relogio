@@ -9,11 +9,9 @@ function displayJson1(url) {
 }
 
 function displayJson2(url) {
-    const fetchPromise = fetch(url);
-
-    fetchPromise
-        .then((response) => response.json())
-        .then((data) => console.log(data))
+    fetch(url)
+        .then(response => response.json())
+        .then(json => console.log(json))
 }
 
 function dadoFormatado(dado) {
