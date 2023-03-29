@@ -14,6 +14,15 @@ function displayJson2(url) {
         .then(jsonObject => console.log(jsonObject))
 }
 
+async function displayMovie(id) {
+    const res = await fetch(`https://www.omdbapi.com/?apikey=55cb0de2&i=${id}`);
+    json = await res.json();
+
+    console.log(json);
+}
+
+displayMovie('tt1276104');
+
 function dadoFormatado(dado) {
     if (dado < 10) {
         dado = '0' + dado.toString();
