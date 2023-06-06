@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relógio Digital</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #2c3e50;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+        
+        .clock {
+            text-align: center;
+        }
+        
+        .clock .time {
+            font-size: 80px;
+            margin-bottom: 10px;
+        }
+        
+        .clock .milliseconds {
+            font-size: 30px;
+            opacity: 0.7;
+        }
+        
+        .clock .date {
+            font-size: 24px;
+            opacity: 0.7;
+        }
+    </style>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hour = now.getHours();
+            const minute = now.getMinutes();
+            const second = now.getSeconds();
+            const millisecond = now.getMilliseconds();
+
+            document.getElementById("time").innerHTML = `${formatTime(hour)}h ${formatTime(minute)}m ${formatTime(second)}s ${formatTime(millisecond)}ms`;
+            
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            const year = now.getFullYear();
+            const date = formatTime(day) + "/" + formatTime(month) + "/" + year;
+            document.getElementById("date").innerHTML = date;
+        }
+        
+        function formatTime(time) {
+            return time < 10 ? "0" + time : time;
+        }
+        
+        function formatMilliseconds(milliseconds) {
+            if (milliseconds < 10) {
+                return "00" + milliseconds;
+            } else if (milliseconds < 100) {
+                return "0" + milliseconds;
+            } else {
+                return milliseconds;
+            }
+        }
+        
+        setInterval(updateClock, 1);
+    </script>
+</head>
+<body>
+    <div class="clock">
+        <div class="time" id="time"></div>
+        <div class="date" id="date"></div>
+    </div>
+</body>
+</html>
