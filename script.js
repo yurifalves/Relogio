@@ -4,7 +4,7 @@ function displayJson1(url) {
         const promise = response.json();
         return promise;
     }
-
+    // comentário teste git!!
     getJsonPromise(url).then((json) => console.log(json));
 }
 
